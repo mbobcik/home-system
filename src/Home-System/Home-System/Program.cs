@@ -1,3 +1,4 @@
+using Home_System.Services;
 namespace Home_System
 {
     public class Program
@@ -12,6 +13,8 @@ namespace Home_System
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddSingleton(typeof (IJobService), typeof(JobService));
 
             var app = builder.Build();
 
