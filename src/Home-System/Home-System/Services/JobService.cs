@@ -19,11 +19,13 @@ namespace Home_System.Services
             var startInfo = new ProcessStartInfo
             {
                 FileName = "pwsh.exe",
-                Arguments = $"-NoProfile -ExecutionPolicy ByPass {{ {contract.Script} }}",
+                Arguments = $"-NoProfile -ExecutionPolicy ByPass -Command {contract.Script} ",
                 UseShellExecute = false,
+                CreateNoWindow = true,
+                RedirectStandardOutput = true,
             };
             var process = Process.Start(startInfo);
-            await process.WaitForExitAsync();
+            process.WaitForExit();
             _logger.LogInformation($"Finished '{contract.Script}' in {process.ExitTime - process.StartTime}");
             var result = await process.StandardOutput.ReadToEndAsync();
 
