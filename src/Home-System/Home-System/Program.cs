@@ -1,4 +1,5 @@
 using Home_System.Services;
+using Home_System.Shared;
 namespace Home_System
 {
     public class Program
@@ -14,7 +15,8 @@ namespace Home_System
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddSingleton(typeof (IJobService), typeof(JobService));
+            builder.Services.AddSingleton(typeof(IJobService), typeof(JobService));
+            builder.Services.AddSingleton(typeof(IConfigurationLoader), typeof(ConfigurationLoader));
 
             var app = builder.Build();
 

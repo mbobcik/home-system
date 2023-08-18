@@ -7,35 +7,38 @@ using System.Threading.Tasks;
 
 namespace Home_System.Shared
 {
-    public class ConfigurationLoader
+    public class ConfigurationLoader : IConfigurationLoader
     {
-        // TODO: Create as singleton. Or maybe somehow via dependency injection
 
         private const string configFileName = "configuration.json";
         private Configuration configuration;
-        private ConfigurationLoader() 
-        { 
-            if (File.Exists(configFileName))
+
+        public Configuration Load()
+        {
+            if (this.configuration == null)
             {
-                string jsonString = File.ReadAllText(configFileName);
-                configuration = JsonSerializer.Deserialize<Configuration>(jsonString);
-                if (configuration == null )
+                if (File.Exists(configFileName))
+                {
+                    string jsonString = File.ReadAllText(configFileName);
+                    configuration = JsonSerializer.Deserialize<Configuration>(jsonString);
+                    if (configuration == null)
+                    {
+                        configuration = new Configuration();
+                    }
+                }
+                else
                 {
                     configuration = new Configuration();
+                    using FileStream createStream = File.Create(configFileName);
+                    JsonSerializer.Serialize(createStream, configuration, new JsonSerializerOptions
+                    {
+                        AllowTrailingCommas = true,
+                        WriteIndented = true,
+                    });
+                    createStream.Dispose();
                 }
             }
-            else
-            {
-                configuration = new Configuration();
-                using FileStream createStream = File.Create(configFileName);
-                JsonSerializer.Serialize(createStream, configuration, new JsonSerializerOptions
-                {
-                    AllowTrailingCommas = true,
-                    WriteIndented = true,
-                });
-                createStream.Dispose();
-            }
+            return this.configuration; 
         }
-        
     }
 }

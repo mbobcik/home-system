@@ -4,10 +4,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Home-System", "Home-System\Home-System.csproj", "{2BF8E496-EEB8-4912-B6B7-EC026B24B7F7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{663999C8-5939-42B4-B5D4-A84AA10BCD7F} = {663999C8-5939-42B4-B5D4-A84AA10BCD7F}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database.Context", "Database.Contextt\Database.Context.csproj", "{14230051-E6FB-4DAB-90C5-583B5AAB5BBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Home-System.Shared", "Home-System.Shared\Home-System.Shared.csproj", "{663999C8-5939-42B4-B5D4-A84AA10BCD7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Home-System.Shared", "Home-System.Shared\Home-System.Shared.csproj", "{663999C8-5939-42B4-B5D4-A84AA10BCD7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
